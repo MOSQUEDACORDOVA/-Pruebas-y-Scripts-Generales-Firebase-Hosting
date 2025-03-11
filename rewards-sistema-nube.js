@@ -1,7 +1,7 @@
 // Cargar el archivo CSS
 const link = document.createElement('link');
 link.rel = 'stylesheet';
-link.href = 'https://firebasestorage.googleapis.com/v0/b/pruebasy-scripts-genera-97j72j.firebasestorage.app/o/styles.css?alt=media&token=8b7cdc66-ff71-4f3f-b128-e6a222876a7a'; // URL del archivo CSS en la CDN
+link.href = 'https://pruebasy-scripts-genera-97j72j.web.app/styles.css'; // URL del archivo CSS en la CDN
 document.head.appendChild(link);
 
 // Crear el botón flotante
@@ -23,7 +23,7 @@ button.style.cursor = 'pointer';
 document.body.appendChild(button);
 
 // Cargar el contenido de la ventana emergente desde un archivo HTML
-fetch('https://mosquedacordova.com', { mode: 'cors' }) // URL del archivo HTML en la CDN
+fetch('https://pruebasy-scripts-genera-97j72j.web.app/popup.html', { mode: 'cors' }) // URL del archivo HTML en la CDN
   .then(response => response.text())
   .then(html => {
     document.body.insertAdjacentHTML('beforeend', html);
