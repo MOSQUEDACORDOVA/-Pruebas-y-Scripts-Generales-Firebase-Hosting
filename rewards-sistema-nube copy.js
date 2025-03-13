@@ -8,16 +8,6 @@ document.head.appendChild(link);
 const button = document.createElement('button');
 button.id = 'floatingButton';
 button.innerText = 'Externo 2';
-button.style.position = 'fixed';
-button.style.bottom = '20px';
-button.style.left = '20px';
-button.style.padding = '10px 20px';
-button.style.backgroundColor = '#007BFF';
-button.style.color = '#FFF';
-button.style.border = 'none';
-button.style.borderRadius = '5px';
-button.style.boxShadow = '0 2px 5px rgba(0, 0, 0, 0.3)';
-button.style.cursor = 'pointer';
 
 // Agregar el botón al cuerpo del documento
 document.body.appendChild(button);
