@@ -32,7 +32,7 @@ button.addEventListener('click', () => {
 (function () {
   if (LS.customer) {
       console.log("Cliente autenticado con ID:", LS.customer);
-      iframe.src = `https://sistemanube.net/popUpMyAccount?tiendaId=${LS.store.id}`; // URL del archivo HTML para clientes autenticados con parámetro tiendaId
+      iframe.src = `https://sistemanube.net/popUpMyAccount?lsCustomer=${LS.customer}`; // URL del archivo HTML para clientes autenticados con parámetro tiendaId
   } else {
       console.log("No hay un cliente autenticado.");
   }
