@@ -1,6 +1,7 @@
 // Detectar tienda
 if (LS.store.id) {
   console.log("Tienda Actual:", LS.store.id);
+  console.log("URL de tienda:", LS.store.url);
 }
 // Cargar el archivo CSS
 const link = document.createElement('link');
@@ -21,7 +22,7 @@ const iframe = document.createElement('iframe');
 iframe.id = 'popupIframe';
 
 // Asignar el parámetro tiendaId al iframe
-iframe.src = `https://sistemanube.net/popUpInicio?tiendaId=${LS.store.id}`; // URL del archivo HTML en la CDN con parámetro tiendaId
+iframe.src = `https://sistemanube.net/popUpInicio?tiendaId=${LS.store.id}&storeURL=${LS.store.url}`; // URL del archivo HTML en la CDN con parámetro tiendaId
 document.body.appendChild(iframe);
 
 // Mostrar la ventana emergente al hacer clic en el botón
@@ -32,7 +33,7 @@ button.addEventListener('click', () => {
 (function () {
   if (LS.customer) {
       console.log("Cliente autenticado con ID:", LS.customer);
-      iframe.src = `https://sistemanube.net/popUpMyAccount?lsCustomer=${LS.customer}`; // URL del archivo HTML para clientes autenticados con parámetro tiendaId
+      iframe.src = `https://sistemanube.net/popUpMyAccount?lsCustomer=${LS.customer}&tiendaId=${LS.store.id}&storeURL=${LS.store.url}`; // URL del archivo HTML para clientes autenticados con parámetro tiendaId
   } else {
       console.log("No hay un cliente autenticado.");
   }
