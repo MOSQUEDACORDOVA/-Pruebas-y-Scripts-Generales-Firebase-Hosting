@@ -14,9 +14,14 @@
   background-size: cover;
 
 }
-
-#popupIframe {
-  width: calc(98% - 35px);;
+#closeButton{
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+#iframeContainer{
+  width: calc(98% - 35px);
   height: calc(98vh - 100px);
   max-height: 720px;
   max-width: 430px;
@@ -27,6 +32,13 @@
   border: 1px solid #CCC;
   border-radius: 5px;
   box-shadow: 16px 16px 32px rgba(0, 0, 0, 0.1);
-  display: none;
   z-index: 9999999999;
+  overflow: hidden;
 }
+
+#popupIframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
