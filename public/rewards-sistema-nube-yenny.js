@@ -89,7 +89,6 @@ document.addEventListener('click', (event) => {
 (function () {
   if (LS.customer && LS.store) {
       console.log("Cliente autenticado con ID:", LS.customer);
-      console.log("Tienda ID:", LS.store.id);
       
       // Obtener el email del cliente usando la API
       const customerId = LS.customer.id || LS.customer;
