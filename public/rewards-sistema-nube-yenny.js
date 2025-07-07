@@ -43,8 +43,8 @@ closeButton.style.cursor = 'pointer';
 // Agregar el ícono SVG al botón
 closeButton.innerHTML = `
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M19.9992 20L12 12M12.0009 20L20 12" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M29.3334 16C29.3334 8.6362 23.3638 2.66666 16.0001 2.66666C8.63628 2.66666 2.66675 8.6362 2.66675 16C2.66675 23.3637 8.63628 29.3333 16.0001 29.3333C23.3638 29.3333 29.3334 23.3637 29.3334 16Z" fill="black" fill-opacity="0.16" stroke="#fff" stroke-width="2"/>
+  <path d="M19.9992 20L12 12M12.0009 20L20 12" stroke="#cccccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M29.3334 16C29.3334 8.6362 23.3638 2.66666 16.0001 2.66666C8.63628 2.66666 2.66675 8.6362 2.66675 16C2.66675 23.3637 8.63628 29.3333 16.0001 29.3333C23.3638 29.3333 29.3334 23.3637 29.3334 16Z" fill="black" fill-opacity="0.16" stroke="#cccccc" stroke-width="2"/>
   </svg>
 `;
 
@@ -63,7 +63,7 @@ iframe.id = 'popupIframe';
 iframe.allow = 'clipboard-write'; // Agregar el atributo allow para permitir clipboard-write
 
 // Asignar el parámetro tiendaId al iframe
-iframe.src = `https://sistemanube.net/popUpInicio?tiendaId=${LS.store.id}&storeURL=${LS.store.url}`; // URL del archivo HTML en la CDN con parámetro tiendaId
+iframe.src = `https://yenny-elateneo.web.app`; // URL del archivo HTML en la CDN con parámetro tiendaId
 
 // Agregar el iframe al contenedor
 iframeContainer.appendChild(iframe);
@@ -87,11 +87,35 @@ document.addEventListener('click', (event) => {
 });
 
 (function () {
-  if (LS.customer) {
+  if (LS.customer && LS.store) {
       console.log("Cliente autenticado con ID:", LS.customer);
-      iframe.src = `https://sistemanube.net/popUpMyAccount?lsCustomer=${LS.customer}&tiendaId=${LS.store.id}&storeURL=${LS.store.url}`; // URL del archivo HTML para clientes autenticados con parámetro tiendaId
+      console.log("Tienda ID:", LS.store.id);
+      
+      // Obtener el email del cliente usando la API
+      const customerId = LS.customer.id || LS.customer;
+      const storeId = LS.store.id;
+      const apiUrl = `https://getcustomeremailhandler-2rimbhixdq-uc.a.run.app?customerId=${customerId}&storeId=${storeId}`;
+      
+      fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+          if (data.success && data.data && data.data.email) {
+            console.log("Email obtenido exitosamente:", data.data.email);
+            iframe.src = `https://yenny-elateneo.web.app/login-email?email=${data.data.email}`;
+          } else {
+            console.error("Error al obtener el email:", data.message || "Respuesta inválida");
+            // Fallback a la URL sin email
+            iframe.src = `https://yenny-elateneo.web.app`;
+          }
+        })
+        .catch(error => {
+          console.error("Error en la solicitud del email:", error);
+          // Fallback a la URL sin email
+          iframe.src = `https://yenny-elateneo.web.app`;
+        });
   } else {
-      console.log("No hay un cliente autenticado.");
+      console.log("No hay un cliente autenticado o información de tienda.");
+      iframe.src = `https://yenny-elateneo.web.app`;
   }
 })();
 
